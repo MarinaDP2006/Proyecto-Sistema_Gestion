@@ -1,166 +1,166 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 14-04-2025 a las 21:34:46
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `cine`
+-- Base de datos: `gestioncine`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `actores`
+-- Estructura de tabla para la tabla `actor`
 --
 
-CREATE TABLE `actores` (
-  `id_actor` int(11) NOT NULL,
-  `nombre` varchar(255) NOT NULL,
-  `id_pelicula` int(11) DEFAULT NULL
+CREATE TABLE `actor` (
+  `actor_id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellidos` varchar(100) NOT NULL,
+  `año_nacimiento` int(11) DEFAULT NULL,
+  `nacionalidad` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `actores`
+-- Volcado de datos para la tabla `actor`
 --
 
-INSERT INTO `actores` (`id_actor`, `nombre`, `id_pelicula`) VALUES
-(1, 'Vera Farmiga', 1),
-(2, 'Patrick Wilson', 1),
-(3, 'Bill Skarsgård', 2),
-(4, 'Tom Hanks', 3),
-(5, 'Viggo Mortensen', 4),
-(6, 'Leonardo DiCaprio', 5),
-(7, 'Matthew McConaughey', 6),
-(8, 'Robert Downey Jr.', 7),
-(9, 'Chris Evans', 7),
-(10, 'Christian Bale', 8);
+INSERT INTO `actor` (`actor_id`, `nombre`, `apellidos`, `año_nacimiento`, `nacionalidad`) VALUES
+(1, 'Robert', 'Downey Jr', 1965, 'Estadounidense'),
+(2, 'Chris', 'Evans', 1981, 'Estadounidense'),
+(3, 'Christian', 'Bale', 1974, 'Británico'),
+(4, 'Vera', 'Farmiga', 1973, 'Estadounidense'),
+(5, 'Patrick', 'Wilson', 1973, 'Estadounidense'),
+(6, 'Bill', 'Skarsgård', 1990, 'Sueco'),
+(7, 'Tom', 'Hanks', 1956, 'Estadounidense'),
+(8, 'Viggo', 'Mortensen', 1958, 'Estadounidense-Danés'),
+(9, 'Leonardo', 'DiCaprio', 1974, 'Estadounidense'),
+(10, 'Matthew', 'McConaughey', 1969, 'Estadounidense');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `generos`
+-- Estructura de tabla para la tabla `genero`
 --
 
-CREATE TABLE `generos` (
-  `id_genero` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL
+CREATE TABLE `genero` (
+  `genero_id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `generos`
+-- Volcado de datos para la tabla `genero`
 --
 
-INSERT INTO `generos` (`id_genero`, `nombre`) VALUES
-(3, 'Ciencia Ficción y Aventura'),
-(2, 'Drama, Romance y Fantasía'),
+INSERT INTO `genero` (`genero_id`, `nombre`) VALUES
+(4, 'Ciencia Ficción y Aventura'),
+(2, 'Drama'),
+(3, 'Romance y Fantasía'),
 (1, 'Terror y Suspenso');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `peliculas`
+-- Estructura de tabla para la tabla `pelicula`
 --
 
-CREATE TABLE `peliculas` (
-  `id_pelicula` int(11) NOT NULL,
-  `titulo` varchar(255) NOT NULL,
-  `anio` int(11) NOT NULL,
-  `genero` varchar(100) NOT NULL,
-  `id_genero` int(11) DEFAULT NULL
+CREATE TABLE `pelicula` (
+  `pelicula_id` int(11) NOT NULL,
+  `titulo` varchar(100) NOT NULL,
+  `año_estreno` int(11) DEFAULT NULL CHECK (`año_estreno` > 1880),
+  `duracion` int(11) DEFAULT NULL,
+  `genero_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `peliculas`
+-- Volcado de datos para la tabla `pelicula`
 --
 
-INSERT INTO `peliculas` (`id_pelicula`, `titulo`, `anio`, `genero`, `id_genero`) VALUES
-(1, 'El Conjuro', 2013, 'Terror y Suspenso', 1),
-(2, 'It', 2017, 'Terror y Suspenso', 1),
-(3, 'Forrest Gump', 1994, 'Drama, Romance y Fantasía', 2),
-(4, 'El Señor de los Anillos', 2000, 'Romance y Fantasía', 3),
-(5, 'Titanic', 1997, 'Drama, Romance y Fantasía', 2),
-(6, 'Interstellar', 2014, 'Ciencia Ficción y Aventura', 3),
-(7, 'Avengers', 2012, 'Ciencia Ficción y Aventura', 3),
-(8, 'The Dark Knight', 2008, 'Ciencia Ficción y Aventura', 3);
+INSERT INTO `pelicula` (`pelicula_id`, `titulo`, `año_estreno`, `duracion`, `genero_id`) VALUES
+(1, 'Avengers', 2012, 143, 4),
+(2, 'El Conjuro', 2013, 112, 1),
+(3, 'It', 2017, 135, 1),
+(4, 'Forrest Gump', 1994, 142, 2),
+(5, 'El Señor de los Anillos', 2001, 178, 3),
+(6, 'Titanic', 1997, 195, 3),
+(7, 'Interstellar', 2014, 169, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reparto`
+--
+
+CREATE TABLE `reparto` (
+  `pelicula` varchar(100) DEFAULT NULL,
+  `actor` varchar(150) DEFAULT NULL,
+  `personaje` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reparto`
+--
+
+INSERT INTO `reparto` (`pelicula`, `actor`, `personaje`) VALUES
+('Avengers', 'Robert Downey Jr', 'Iron Man'),
+('Avengers', 'Chris Evans', 'Capitán América'),
+('The Dark Knight', 'Christian Bale', 'Batman'),
+('El Conjuro', 'Vera Farmiga', 'Lorraine Warren'),
+('El Conjuro', 'Patrick Wilson', 'Ed Warren'),
+('It', 'Bill Skarsgard', 'It'),
+('Forrest Gump', 'Tom Hanks', 'Forrest Gump'),
+('El Señor de los Anillos', 'Viggo Mortensen', 'Aragorn'),
+('Titanic', 'Leonardo DiCaprio', 'Jack Dawson'),
+('Interstellar', 'Matthew McConaughey', 'Cooper');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `actores`
+-- Indices de la tabla `actor`
 --
-ALTER TABLE `actores`
-  ADD PRIMARY KEY (`id_actor`),
-  ADD KEY `id_pelicula` (`id_pelicula`);
+ALTER TABLE `actor`
+  ADD PRIMARY KEY (`actor_id`);
 
 --
--- Indices de la tabla `generos`
+-- Indices de la tabla `genero`
 --
-ALTER TABLE `generos`
-  ADD PRIMARY KEY (`id_genero`),
+ALTER TABLE `genero`
+  ADD PRIMARY KEY (`genero_id`),
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
--- Indices de la tabla `peliculas`
+-- Indices de la tabla `pelicula`
 --
-ALTER TABLE `peliculas`
-  ADD PRIMARY KEY (`id_pelicula`),
-  ADD KEY `id_genero` (`id_genero`);
+ALTER TABLE `pelicula`
+  ADD PRIMARY KEY (`pelicula_id`),
+  ADD KEY `genero_id` (`genero_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `actores`
+-- AUTO_INCREMENT de la tabla `actor`
 --
-ALTER TABLE `actores`
-  MODIFY `id_actor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `actor`
+  MODIFY `actor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de la tabla `generos`
+-- AUTO_INCREMENT de la tabla `genero`
 --
-ALTER TABLE `generos`
-  MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `genero`
+  MODIFY `genero_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `peliculas`
+-- AUTO_INCREMENT de la tabla `pelicula`
 --
-ALTER TABLE `peliculas`
-  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `pelicula`
+  MODIFY `pelicula_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `actores`
+-- Filtros para la tabla `pelicula`
 --
-ALTER TABLE `actores`
-  ADD CONSTRAINT `actores_ibfk_1` FOREIGN KEY (`id_pelicula`) REFERENCES `peliculas` (`id_pelicula`);
-
---
--- Filtros para la tabla `peliculas`
---
-ALTER TABLE `peliculas`
-  ADD CONSTRAINT `peliculas_ibfk_1` FOREIGN KEY (`id_genero`) REFERENCES `generos` (`id_genero`);
+ALTER TABLE `pelicula`
+  ADD CONSTRAINT `pelicula_ibfk_1` FOREIGN KEY (`genero_id`) REFERENCES `genero` (`genero_id`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
