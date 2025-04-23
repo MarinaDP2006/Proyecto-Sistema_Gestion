@@ -1,12 +1,10 @@
--- Base de datos: `gestioncine`
-
 CREATE TABLE `actor` (
   `actor_id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
   `año_nacimiento` int(11) DEFAULT NULL,
   `nacionalidad` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 
 INSERT INTO `actor` (`actor_id`, `nombre`, `apellidos`, `año_nacimiento`, `nacionalidad`) VALUES
 (1, 'Robert', 'Downey Jr', 1965, 'Estadounidense'),
@@ -24,7 +22,7 @@ INSERT INTO `actor` (`actor_id`, `nombre`, `apellidos`, `año_nacimiento`, `naci
 CREATE TABLE `genero` (
   `genero_id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 
 
 INSERT INTO `genero` (`genero_id`, `nombre`) VALUES
@@ -56,7 +54,7 @@ CREATE TABLE `reparto` (
   `pelicula` varchar(100) DEFAULT NULL,
   `actor` varchar(150) DEFAULT NULL,
   `personaje` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 
 
 INSERT INTO `reparto` (`pelicula`, `actor`, `personaje`) VALUES
