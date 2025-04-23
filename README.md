@@ -1,4 +1,5 @@
 # ProyectoDam1
+
 PARTE 1: 
     - Estructura y análisis del proyecto
         Descripción
@@ -7,6 +8,7 @@ PARTE 1:
         - Diagrama de Secuencia
     - Base de datos
          - gestioncine.sql
+
 PARTE 2:
 - Implementacion de estructura + conexion a BD
 - Implementacion de la Base de Datos
