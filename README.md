@@ -6,3 +6,4 @@ PARTE 1:
         - Diagrama de Casos de Uso + Descripciones
         - Diagrama de Secuencia
     - Base de datos
+         - gestioncine.sql
