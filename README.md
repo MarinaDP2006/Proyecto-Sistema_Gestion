@@ -1,7 +1,7 @@
 # ProyectoDam1
 
 PARTE 1: 
-    - Estructura y análisis del proyecto
+- Estructura y análisis del proyecto
         Descripción
         Diagrama Clases
         - Diagrama de Casos de Uso + Descripciones
