@@ -1,0 +1,36 @@
+Manual de usuario
+Esta aplicación está diseñada para organizar información sobre películas y actores, permitiendo a los usuarios buscar datos y a los administradores gestionar el contenido.
+Inicio de la Aplicación
+-	Al abrir la aplicación, se mostrará una pantalla de inicio de sesión donde:
+-	Administradores: Ingresan con su usuario y contraseña para acceder a funciones avanzadas.
+-	Usuarios normales: Pueden explorar la información sin necesidad de iniciar sesión.
+
+Menú según Rol:
+-	Para Administradores
+El menú del administrador incluye las siguientes opciones:
+
+Gestión de Actores/Actrices
+-	Añadir nuevo actor: Clic en "Nuevo" → Llenar formulario (nombre, apellidos, año de nacimiento, nacionalidad).
+-	Editar actor: Seleccionar actor en la lista → Clic en "Modificar" → Editar datos → Guardar.
+-	Eliminar actor: Seleccionar actor → Clic en "Borrar" → Confirmar eliminación.
+-	Ver películas del actor: Seleccionar actor → Clic en "Ver filmografía".
+
+Gestión de Películas
+-	Añadir nueva película: Clic en "Nueva Película" → Completar datos (título, año, duración, resumen, género).
+-	Editar película: Seleccionar película → Clic en "Modificar" → Actualizar información.
+-	Eliminar película: Seleccionar película → Clic en "Borrar" → Confirmar.
+-	Añadir/Eliminar actor de una película: Abrir detalles de la película → "Añadir Actor" (seleccionar de la lista) o "Quitar Actor".
+
+Gestión de Géneros
+-	Añadir nuevo género: Ir a "Géneros" → Clic en "Nuevo Género" → Ingresar nombre.
+-	Ver películas por género: Seleccionar género en la lista → Mostrará todas las películas asociadas.
+Cerrar Sesión: Clic en "Cerrar Sesión" para volver al inicio.
+
+Para Usuarios sin Inicio de sesión
+Los usuarios pueden:
+-	Búsqueda de Actores
+Por nacionalidad: Ir a "Actores" → Filtrar por país.
+Por edad: Usar el filtro "Rango de años" para buscar actores por edad.
+-	Búsqueda de Películas
+Por año de estreno: Ir a "Películas" → Filtrar por año.
+Por género: Seleccionar un género en el menú "Géneros" para ver películas relacionadas.
