@@ -1,0 +1,21 @@
+src/
+      aplicación/
+          o	GestorCine.java
+      conexión/
+          o	conexionBaseDatos.java
+      dao/
+        o	ActorDAO.java
+        o	AdminDAO.java
+        o	PeliculaDAO.java
+      o	RepartoDAO.java
+      o	UsuarioDAO.java
+    dto/
+      o	Actor.java
+      o	Admin.java
+      o	Pelicula.java
+      o	Reparto.java
+      o	Usuario.java
+    vista/
+      o	Como_Administrador.java
+      o	Como_Usuario.java
+      o	IniciarSesion.java
