@@ -72,11 +72,13 @@ INSERT INTO actor (actor_id, nombre, apellidos, año_nacimiento, nacionalidad) V
 (9, Leonardo, DiCaprio, 1974, Estadounidense),
 (10, Matthew, McConaughey, 1969, Estadounidense);
 
-INSERT INTO genero (genero_id, nombre) VALUES
-(4, Ciencia Ficción y Aventura),
+INSERT INTO genero (genero_id, nombre, pelicula_id) VALUES
+(4, Ciencia Ficción)
+(5, Aventura),
 (2, Drama),
-(3, Romance y Fantasía),
-(1, Terror y Suspenso);
+(3, Romance) 
+(6, Fantasía),
+(1, Terror);
 
 INSERT INTO pelicula (pelicula_id, titulo, año_estreno, duracion, genero_id) VALUES
 (1, Avengers, 2012, 143, 4),
