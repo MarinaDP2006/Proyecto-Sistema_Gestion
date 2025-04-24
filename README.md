@@ -1,16 +1,14 @@
 # ProyectoDam1
+      
+  
+- Base de datos
+  - gestioncine
+    - procedimientos
+     - modelos
 
-PARTE 1: 
-- Estructura y análisis del proyecto
-    - Base de datos
-         - gestioncine
-         - procedimientos
-
-PARTE 2:
-- Implementacion de estructura + conexion a BD
-- Implementacion de la Base de Datos
-
-PARTE 3:
-- Programación funcional
-- Base de Datos
-      Programación de guiones: funcionalidades completas
+- Programacion
+  - Estructura y análisis del proyecto
+    - Estructura y conexion a BD
+        - Estructura de código
+            - Código para la conexion a BBDD
+                - Implementacion de la Base de Datos
