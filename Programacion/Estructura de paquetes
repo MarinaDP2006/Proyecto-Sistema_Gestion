@@ -7,8 +7,8 @@ src/
         o	ActorDAO.java
         o	AdminDAO.java
         o	PeliculaDAO.java
-      o	RepartoDAO.java
-      o	UsuarioDAO.java
+        o	RepartoDAO.java
+        o	UsuarioDAO.java
     dto/
       o	Actor.java
       o	Admin.java
