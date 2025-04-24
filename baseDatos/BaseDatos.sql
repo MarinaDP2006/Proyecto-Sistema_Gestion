@@ -21,7 +21,7 @@ CREATE TABLE `pelicula` (
   `año_estreno` int(11) DEFAULT NULL CHECK (`año_estreno` > 1880),
   `duracion` int(11) DEFAULT NULL,
   `genero_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 
 CREATE TABLE `reparto` (
   `pelicula` varchar(100) DEFAULT NULL,
