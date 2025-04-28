@@ -1,7 +1,7 @@
 src/
-      aplicación/
+      aplicacion/
           	GestorCine.java
-      conexión/
+      conexion/
           	conexionBaseDatos.java
       dao/
             ActorDAO.java
@@ -15,7 +15,3 @@ src/
       	Pelicula.java
       	Reparto.java
       	Usuario.java
-    vista/
-      	Como_Administrador.java
-      	Como_Usuario.java
-      	IniciarSesion.java
