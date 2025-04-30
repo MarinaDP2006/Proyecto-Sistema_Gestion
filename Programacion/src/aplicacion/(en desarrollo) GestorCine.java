@@ -97,7 +97,7 @@ public class GestorCine {
         actores.add(new Actor(27, "Mark", "Ruffalo", 1967, "Estadounidense"));
         actores.add(new Actor(28, "Scarlett", "Johansson", 1984, "Estadounidense"));
         
-        // Añadir películas (sin Interstellar e It)
+        // Añadir películas
         peliculas.add(new Pelicula(1, "El Conjuro", 2013, 112, "Investigadores paranormales enfrentan un caso real", Genero.TERROR));
         peliculas.add(new Pelicula(2, "Hereditary", 2018, 127, "Una familia atormentada por fuerzas oscuras", Genero.TERROR));
         peliculas.add(new Pelicula(3, "Forrest Gump", 1994, 142, "La vida de un hombre con discapacidad intelectual", Genero.DRAMA));
