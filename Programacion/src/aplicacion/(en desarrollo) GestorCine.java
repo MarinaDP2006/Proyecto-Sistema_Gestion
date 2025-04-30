@@ -178,8 +178,11 @@ public class GestorCine {
         System.out.println("Actor añadido correctamente.");
     }
 
-    private static void gestionPeliculas() {
+   private static void gestionPeliculas() {
         System.out.println("\n--- Gestión de Películas ---");
+        System.out.println("ID de la pelicula: ");
+        int id = scanner.nextInt();
+     
         System.out.print("Ingrese el título de la película: ");
         String titulo = scanner.nextLine();
         
@@ -187,18 +190,17 @@ public class GestorCine {
         int año = scanner.nextInt();
         scanner.nextLine();
         
-        System.out.println("Ingrese ela duracion: ");
+        System.out.println("Ingrese la duracion: ");
         int duracion = scanner.nextInt();
-        scanner.nextLine();
         
         System.out.println("¿Y el resumen? ¡Ponlo!: ");
         String resumen = scanner.next();
         scanner.nextLine();
         
         System.out.print("Ingrese el género de la película: ");
-        Genero genero = null; // no puedo inicializarlo correctamente (CORREGIR)
+        Genero genero = null;
         
-		peliculas.add(new Pelicula(titulo, año, duracion, resumen, genero));
+	peliculas.add(new Pelicula(id, titulo, año, duracion, resumen, genero));
         System.out.println("Película añadida correctamente.");
     }
 
