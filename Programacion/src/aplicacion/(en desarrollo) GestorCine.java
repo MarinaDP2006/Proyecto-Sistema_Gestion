@@ -203,9 +203,21 @@ public class GestorCine {
     }
 
     private static void gestionReparto() {
-        
-    }
+    	System.out.println("\n--- Gestión de Reparto ---");
+    	System.out.print("Ingrese el ID de la película: ");
+    	int IDpelicula = scanner.nextInt();
+    	scanner.nextLine();
+    	System.out.print("Ingrese el ID del actor: ");
+    	int IDactor = scanner.nextInt();
+    	scanner.nextLine();
+    	System.out.print("Ingrese el personaje que interpreta el actor: ");
+    	String personaje = scanner.nextLine();
 
+    	// Validar existencia de película y actor
+
+    	// Verificar si el actor ya está en el reparto de la película con el mismo personaje
+   }
+	    
     private static void realizarConsultas() {
         System.out.println("\n--- Consultas ---");
         System.out.print("Ingrese el año de estreno para buscar películas: ");
