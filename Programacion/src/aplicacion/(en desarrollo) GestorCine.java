@@ -216,6 +216,7 @@ public class GestorCine {
     	// Validar existencia de película y actor
 
     	// Verificar si el actor ya está en el reparto de la película con el mismo personaje
+	    
    }
 	    
     private static void realizarConsultas() {
