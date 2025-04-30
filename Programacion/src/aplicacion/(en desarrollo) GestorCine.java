@@ -163,20 +163,148 @@ public class GestorCine {
         System.out.println("Datos iniciales cargados correctamente.");
     }
 
-     // Métodos para la gestión de actores, películas, reparto y consultas
     private static void gestionActores() {
         Scanner sc = new Scanner(System.in);
-       } 
         
+        while (true) {
+            System.out.println("\n--- GESTIÓN DE ACTORES ---");
+            System.out.println("1. Añadir actor");
+            System.out.println("2. Borrar actor");
+            System.out.println("3. Modificar actor");
+            System.out.println("4. Volver al menú principal");
+            System.out.print("Seleccione una opción: ");
+            
+            int opcion = sc.nextInt();
+            sc.nextLine(); 
+            
+            switch (opcion) {
+                case 1:
+                    System.out.println("\nAñadir nuevo actor...");
+                    
+                    break;
+                case 2:
+                    System.out.println("\nBorrar actor...");
+
+                    break;
+                case 3:
+                    System.out.println("\nModificar actor...");
+
+                    break;
+                case 4:
+                    return; // Volver al menú principal
+                default:
+                    System.out.println("Opción no válida. Intente nuevamente.");
+            }
+        }
+    }
+
     private static void gestionPeliculas() {
         Scanner sc = new Scanner(System.in);
+        
+        while (true) {
+            System.out.println("\n--- GESTIÓN DE PELÍCULAS ---");
+            System.out.println("1. Ver información de una película");
+            System.out.println("2. Añadir nueva película");
+            System.out.println("3. Eliminar película existente");
+            System.out.println("4. Volver al menú principal");
+            System.out.print("Seleccione una opción: ");
+            
+            int opcion = sc.nextInt();
+            sc.nextLine(); 
+            
+            switch (opcion) {
+                case 1:
+                    System.out.println("\nInformación de película...");
+                    // mostrar info
+                    break;
+                case 2:
+                    System.out.println("\nAñadir nueva película...");
+                    // añadir
+                    break;
+                case 3:
+                    System.out.println("\nEliminar película...");
+                    // eliminar
+                    break;
+                case 4:
+                    return; // Volver al menú principal
+                default:
+                    System.out.println("Opción no válida. Intente nuevamente.");
+            }
+        }
     }
 
     private static void gestionReparto() {
-       Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        
+        while (true) {
+            System.out.println("\n--- GESTIÓN DE REPARTO ---");
+            System.out.println("1. Añadir actor a película");
+            System.out.println("2. Eliminar actor de película");
+            System.out.println("3. Modificar rol de actor");
+            System.out.println("4. Volver al menú principal");
+            System.out.print("Seleccione una opción: ");
+            
+            int opcion = sc.nextInt();
+            sc.nextLine(); 
+            
+            switch (opcion) {
+                case 1:
+                    System.out.println("\nAñadir actor a película...");
+                    // añadir
+                    break;
+                case 2:
+                    System.out.println("\nEliminar actor de película...");
+                    // eliminar
+                    break;
+                case 3:
+                    System.out.println("\nModificar rol de actor...");
+                    // modificar
+                    break;
+                case 4:
+                    return; // Volver al menú principal
+                default:
+                    System.out.println("Opción no válida. Intente nuevamente.");
+            }
+        }
     }
 
     private static void realizarConsultas() {
         Scanner sc = new Scanner(System.in);
+        
+        while (true) {
+            System.out.println("\n--- CONSULTAS ---");
+            System.out.println("1. Buscar película por año de estreno");
+            System.out.println("2. Buscar actor/actriz por edad");
+            System.out.println("3. Consultar nacionalidad de actor/actriz");
+            System.out.println("4. Consultar género de película");
+            System.out.println("5. Volver al menú principal");
+            System.out.print("Seleccione una opción: ");
+            
+            int opcion = sc.nextInt();
+            sc.nextLine(); 
+            
+            switch (opcion) {
+                case 1:
+                    System.out.println("\nBuscar por año...");
+                    
+                    break;
+                case 2:
+                    System.out.println("\nBuscar por edad...");
+
+                    break;
+                case 3:
+                    System.out.println("\nConsultar nacionalidad...");
+                    
+                    break;
+                case 4:
+                    System.out.println("\nConsultar género...");
+                    
+                    break;
+                case 5:
+                    return; // Volver al menú principal
+                default:
+                    System.out.println("Opción no válida. Intentálo otra vez.");
+            }
+        }
     }
 }
