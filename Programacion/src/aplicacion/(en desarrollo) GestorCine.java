@@ -1,4 +1,3 @@
-// En desarrollo
 package aplicacion;
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +5,7 @@ import java.util.Scanner;
 
 /* IMPLEMENTO LOS DAO Y DTO */
 import dao.AdminDAO;
+import dao.PeliculaDAO;
 import dao.UsuarioDAO;
 import dto.Actor;
 import dto.Genero;
@@ -64,6 +64,7 @@ public class GestorCine {
         System.out.print("\n¿Está seguro que desea salir? (SI/NO): ");
         String respuesta = scanner.nextLine();
         return respuesta.equalsIgnoreCase("SI");
+    }
         
     // Datos incluidos de la base de datos
     private static void cargarDatosIniciales() {
@@ -178,11 +179,12 @@ public class GestorCine {
         System.out.println("Actor añadido correctamente.");
     }
 
-   private static void gestionPeliculas() {
+    private static void gestionPeliculas() {
         System.out.println("\n--- Gestión de Películas ---");
         System.out.println("ID de la pelicula: ");
         int id = scanner.nextInt();
-     
+        scanner.nextLine();   
+
         System.out.print("Ingrese el título de la película: ");
         String titulo = scanner.nextLine();
         
@@ -200,8 +202,8 @@ public class GestorCine {
         System.out.print("Ingrese el género de la película: ");
         Genero genero = null;
         
-	peliculas.add(new Pelicula(id, titulo, año, duracion, resumen, genero));
-        System.out.println("Película añadida correctamente.");
+	PeliculaDAO.add(new PeliculaDAO());
+    System.out.println("Película añadida correctamente.");
     }
 
     private static void gestionReparto() {
@@ -215,24 +217,55 @@ public class GestorCine {
     	System.out.print("Ingrese el personaje que interpreta el actor: ");
     	String personaje = scanner.nextLine();
 
-    	// Validar existencia de película y actor
+        // Validar existencia de película y actor
+        PeliculaDAO pelicula = peliculas.stream()
+            .filter(p -> p.getId() == IDpelicula)
+            .findFirst()
+            .orElse(null);
+        Actor actor = actores.stream()
+            .filter(a -> a.getId() == IDactor)
+            .findFirst()
+            .orElse(null);
+
+        if (pelicula == null) {
+            System.out.println("La película con ese ID no existe.");
+            return;
+        }
+        if (actor == null) {
+            System.out.println("El actor con ese ID no existe.");
+            return;
+        }
 
     	// Verificar si el actor ya está en el reparto de la película con el mismo personaje
-	    
-   }
+	    boolean yaExiste = repartos.stream() /*Verifica si el actor ya aparece en la pelicula*/
+        .anyMatch(r -> r.getPelicula() == IDpelicula && r.getActor() == IDactor && r.getPersonaje().equalsIgnoreCase(personaje));
+    
+        if (yaExiste) {
+            System.out.println("El actor ya está en el reparto de la película con el mismo personaje.");
+            return;
+        }
+
+        /*Si ya existe se  muestra que está*/
+        repartos.add(new Reparto(IDpelicula, IDactor, personaje));
+        System.out.println("Reparto añadido correctamente.");
+
+    	// Agregar al reparto
+    	repartos.add(new Reparto(IDpelicula, IDactor, personaje));
+    	System.out.println("Actor añadido al reparto correctamente.");
+}
 	    
     private static void realizarConsultas() {
         System.out.println("\n--- Consultas ---");
         System.out.print("Ingrese el año de estreno para buscar películas: ");
         int año = scanner.nextInt();
         scanner.nextLine();
-       
+
         //Filtra y muestra películas:
-        peliculas.stream()
-                 .filter(p -> p.getAño() == año)
-                 .forEach(p -> System.out.println("Película encontrada: " + p.getTitulo()));
+        PeliculaDAO.stream()
+        .filter(p -> p.getAño() == año)
+        .forEach(p -> System.out.println("Película encontrada: " + p.getTitulo()));
         // No hay peli, mensjae error
-        if (peliculas.stream().noneMatch(p -> p.getAño() == año)) {
+        if (PeliculaDAO.stream().noneMatch(p -> p.getAño() == año)) {
             System.out.println("No se encontraron películas para el año especificado.");
         }
     }
