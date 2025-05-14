@@ -29,7 +29,7 @@ CREATE TABLE reparto (
     FOREIGN KEY (pelicula_id) REFERENCES pelicula(pelicula_id),
     FOREIGN KEY (actor_id) REFERENCES actor(actor_id)
 );
---Filtros--
+
 ALTER TABLE actor
 ADD PRIMARY KEY (actor_id);
 
@@ -59,7 +59,6 @@ ALTER TABLE reparto
 ADD CONSTRAINT reparto_ibfk_1 FOREIGN KEY (pelicula_id) REFERENCES pelicula (pelicula_id) ON DELETE CASCADE,
 ADD CONSTRAINT reparto_ibfk_2 FOREIGN KEY (actor_id) REFERENCES actor (actor_id) ON DELETE CASCADE;
 
-Datos insertados en las tablas
 INSERT INTO genero (genero_id, nombre) VALUES
 (1, 'Terror'),
 (2, 'Drama'),
