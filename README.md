@@ -6,5 +6,5 @@
 
 - Programacion
   - Estructura y análisis del proyecto
-    - Estructura y conexion a BD
-    - src
+  - Estructura y conexion a BD
+  - src
