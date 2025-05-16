@@ -1,27 +1,46 @@
 package dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Clase que representa una película en el sistema.
+ */
 public class Pelicula {
-    private int id;
+    private int idPelicula;
     private String titulo;
     private int año;
-    private  int duracion;
+    private int duracion;
     private String resumen;
+    private Genero genero;
+    private List<Actor> actores; // Lista de actores que participan en la película
 
-public Pelicula(int id, String titulo, int año, int duracion, String resumen) {
-        this.id = id;
+    /**
+     * Constructor para crear una nueva película.
+     * @param idPelicula Identificador de la película
+     * @param titulo Título de la película
+     * @param año Año de estreno de la película
+     * @param duracion Duración de la película en minutos
+     * @param resumen Resumen de la película
+     * @param genero Género de la película
+     */
+    public Pelicula(int idPelicula, String titulo, int año, int duracion, String resumen, Genero genero) {
+        this.idPelicula = idPelicula;
         this.titulo = titulo;
         this.año = año;
         this.duracion = duracion;
         this.resumen = resumen;
+        this.genero = genero;
+        this.actores = new ArrayList<>(); // Inicializa la lista de actores
     }
 
     // GET Y SET
-    public int getId() {
-        return id;
+    public int getIdPelicula() {
+        return idPelicula;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idPelicula) {
+        this.idPelicula = idPelicula;
     }
 
     public String getTitulo() {
@@ -56,9 +75,33 @@ public Pelicula(int id, String titulo, int año, int duracion, String resumen) {
         this.resumen = resumen;
     }
 
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
+    /**
+     * Agrega un actor a la película.
+     * @param actor Actor a agregar
+     */
+    public void agregarActor(Actor actor) {
+        this.actores.add(actor);
+    }
+
+    /**
+     * Devuelve la lista de actores que participan en la película.
+     * @return Lista de actores
+     */
+    public List<Actor> getActores() {
+        return new ArrayList<>(actores); // Devuelve una copia de la lista de actores
+    }
+
     @Override
     public String toString() {
-        return "ID: " + id
+        return "ID: " + idPelicula
                 + "\nTitulo: " + titulo
                 + "\nAño: " + año
                 + "\nDuracion: " + duracion
