@@ -1,27 +1,34 @@
 package aplicacion;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /* IMPLEMENTO LOS DAO Y DTO */
-import dao.AdminDAO;
-import dao.PeliculaDAO;
+import dao.AdministradorDAO;
 import dao.UsuarioDAO;
 import dto.Actor;
 import dto.Genero;
 import dto.Pelicula;
 import dto.Reparto;
 
-// Clase principal
+/**
+ * Clase principal para gestionar el sistema cinematográfico.
+ */
 public class GestorCine {
     private static Scanner scanner = new Scanner(System.in);
     private static List<Actor> actores = new ArrayList<>();
     private static List<Pelicula> peliculas = new ArrayList<>();
     private static List<Reparto> repartos = new ArrayList<>();
-    private static AdminDAO adminDAO = new AdminDAO();
+    private static AdministradorDAO adminDAO = new AdministradorDAO();
     private static UsuarioDAO usuarioDAO = new UsuarioDAO(peliculas, actores);
     
-   public static void main(String[] args) {
+    /**
+     * Método principal que inicia el sistema.
+     * @param args Argumentos de línea de comandos
+     */
+    public static void main(String[] args) {
         cargarDatosIniciales(); 
         
         boolean salir = false;
@@ -34,7 +41,8 @@ public class GestorCine {
             System.out.println("5. Salir");
             System.out.print("Seleccione una opción: ");
 
-            int opcion = 5;
+            int opcion = scanner.nextInt();
+            scanner.nextLine(); // Limpiar el buffer
 
             switch (opcion) {
                 case 1:
@@ -59,14 +67,20 @@ public class GestorCine {
         System.out.println("\nSistema cerrado. ¡Hasta pronto!");
         scanner.close();
     }
-        // Salir del menu
+
+    /**
+     * Confirma si el usuario desea salir del sistema.
+     * @return true si desea salir, false en caso contrario
+     */
     private static boolean confirmarSalida() {
         System.out.print("\n¿Está seguro que desea salir? (SI/NO): ");
         String respuesta = scanner.nextLine();
         return respuesta.equalsIgnoreCase("SI");
     }
         
-    // Datos incluidos de la base de datos
+    /**
+     * Carga los datos iniciales en el sistema.
+     */
     private static void cargarDatosIniciales() {
         // Añadir actores
         actores.add(new Actor(1, "Robert", "Downey Jr", 1965, "Estadounidense"));
@@ -164,62 +178,78 @@ public class GestorCine {
         System.out.println("Datos iniciales cargados correctamente.");
     }
 
- // Métodos para la gestión de actores, películas, reparto y consultas
+    /**
+     * Método para gestionar actores.
+     */
     private static void gestionActores() {
         System.out.println("\n--- Gestión de Actores ---");
         System.out.print("Ingrese el nombre del actor: ");
         String nombre = scanner.nextLine();
-        System.out.print("Ingrese la edad del actor: ");
-        int edad = scanner.nextInt();
-        scanner.nextLine();
+        System.out.print("Ingrese el apellido del actor: ");
+        String apellido = scanner.nextLine();
+        System.out.print("Ingrese el año de nacimiento del actor: ");
+        int añoNacimiento = scanner.nextInt();
+        scanner.nextLine(); // Limpiar el buffer
         System.out.print("Ingrese la nacionalidad del actor: ");
         String nacionalidad = scanner.nextLine();
 
-        actores.add(new Actor(edad, nombre, nacionalidad, edad, nacionalidad));
+        actores.add(new Actor(actores.size() + 1, nombre, apellido, añoNacimiento, nacionalidad));
         System.out.println("Actor añadido correctamente.");
     }
 
+    /**
+     * Método para gestionar películas.
+     */
     private static void gestionPeliculas() {
         System.out.println("\n--- Gestión de Películas ---");
-        System.out.println("ID de la pelicula: ");
+        System.out.print("Ingrese el ID de la película: ");
         int id = scanner.nextInt();
-        scanner.nextLine();   
+        scanner.nextLine(); // Limpiar el buffer
 
         System.out.print("Ingrese el título de la película: ");
         String titulo = scanner.nextLine();
         
         System.out.print("Ingrese el año de estreno: ");
         int año = scanner.nextInt();
-        scanner.nextLine();
+        scanner.nextLine(); // Limpiar el buffer
         
-        System.out.println("Ingrese la duracion: ");
+        System.out.print("Ingrese la duración (en minutos): ");
         int duracion = scanner.nextInt();
+        scanner.nextLine(); // Limpiar el buffer
         
-        System.out.println("¿Y el resumen? ¡Ponlo!: ");
-        String resumen = scanner.next();
-        scanner.nextLine();
+        System.out.print("Ingrese el resumen de la película: ");
+        String resumen = scanner.nextLine();
         
         System.out.print("Ingrese el género de la película: ");
-        Genero genero = null;
-        
-	PeliculaDAO.add(new PeliculaDAO());
-    System.out.println("Película añadida correctamente.");
+        String generoStr = scanner.nextLine();
+        Genero genero = Genero.buscarPorNombre(generoStr);
+
+        if (genero == null) {
+            System.out.println("Género no válido.");
+            return;
+        }
+
+        peliculas.add(new Pelicula(id, titulo, año, duracion, resumen, genero));
+        System.out.println("Película añadida correctamente.");
     }
 
+    /**
+     * Método para gestionar el reparto de películas.
+     */
     private static void gestionReparto() {
-    	System.out.println("\n--- Gestión de Reparto ---");
-    	System.out.print("Ingrese el ID de la película: ");
-    	int IDpelicula = scanner.nextInt();
-    	scanner.nextLine();
-    	System.out.print("Ingrese el ID del actor: ");
-    	int IDactor = scanner.nextInt();
-    	scanner.nextLine();
-    	System.out.print("Ingrese el personaje que interpreta el actor: ");
-    	String personaje = scanner.nextLine();
+        System.out.println("\n--- Gestión de Reparto ---");
+        System.out.print("Ingrese el ID de la película: ");
+        int IDpelicula = scanner.nextInt();
+        scanner.nextLine(); // Limpiar el buffer
+        System.out.print("Ingrese el ID del actor: ");
+        int IDactor = scanner.nextInt();
+        scanner.nextLine(); // Limpiar el buffer
+        System.out.print("Ingrese el personaje que interpreta el actor: ");
+        String personaje = scanner.nextLine();
 
         // Validar existencia de película y actor
-        PeliculaDAO pelicula = peliculas.stream()
-            .filter(p -> p.getId() == IDpelicula)
+        Pelicula pelicula = peliculas.stream()
+            .filter(p -> p.getIdPelicula() == IDpelicula)
             .findFirst()
             .orElse(null);
         Actor actor = actores.stream()
@@ -236,37 +266,54 @@ public class GestorCine {
             return;
         }
 
-    	// Verificar si el actor ya está en el reparto de la película con el mismo personaje
-	    boolean yaExiste = repartos.stream() /*Verifica si el actor ya aparece en la pelicula*/
-        .anyMatch(r -> r.getPelicula() == IDpelicula && r.getActor() == IDactor && r.getPersonaje().equalsIgnoreCase(personaje));
+        // Verificar si el actor ya está en el reparto de la película con el mismo personaje
+        boolean yaExiste = repartos.stream()
+            .anyMatch(r -> r.getPelicula() == IDpelicula && r.getActor() == IDactor && r.getPersonaje().equalsIgnoreCase(personaje));
     
         if (yaExiste) {
             System.out.println("El actor ya está en el reparto de la película con el mismo personaje.");
             return;
         }
 
-        /*Si ya existe se  muestra que está*/
+        // Agregar al reparto
         repartos.add(new Reparto(IDpelicula, IDactor, personaje));
         System.out.println("Reparto añadido correctamente.");
+    }
 
-    	// Agregar al reparto
-    	repartos.add(new Reparto(IDpelicula, IDactor, personaje));
-    	System.out.println("Actor añadido al reparto correctamente.");
-}
-	    
+    /**
+     * Método para realizar consultas sobre películas.
+     */
     private static void realizarConsultas() {
-        System.out.println("\n--- Consultas ---");
+        System.out.println("\n--- Consultas peliculas ---");
         System.out.print("Ingrese el año de estreno para buscar películas: ");
         int año = scanner.nextInt();
         scanner.nextLine();
 
-        //Filtra y muestra películas:
-        PeliculaDAO.stream()
-        .filter(p -> p.getAño() == año)
-        .forEach(p -> System.out.println("Película encontrada: " + p.getTitulo()));
-        // No hay peli, mensjae error
-        if (PeliculaDAO.stream().noneMatch(p -> p.getAño() == año)) {
+        // Filtra y muestra películas:
+        List<Pelicula> peliculasEncontradas = peliculas.stream()
+            .filter(p -> p.getAño() == año)
+            .collect(Collectors.toList());
+
+        if (peliculasEncontradas.isEmpty()) {
             System.out.println("No se encontraron películas para el año especificado.");
+        } else {
+            peliculasEncontradas.forEach(p -> System.out.println("Película encontrada: " + p.getTitulo()));
+        }
+        
+        System.out.println("\n--- Consultas de Actores ---");
+        System.out.print("Ingrese el nombre o apellido del actor para buscar: ");
+        String nombre = scanner.nextLine();
+
+        // Filtra y muestra actores:
+        List<Actor> actoresEncontrados = actores.stream()
+            .filter(actor -> actor.getNombre().toLowerCase().contains(nombre.toLowerCase()) || 
+                             actor.getApellido().toLowerCase().contains(nombre.toLowerCase()))
+            .collect(Collectors.toList());
+
+        if (actoresEncontrados.isEmpty()) {
+            System.out.println("No se encontraron actores con el nombre o apellido especificado.");
+        } else {
+            actoresEncontrados.forEach(actor -> System.out.println("Actor encontrado: " + actor));
         }
     }
 }
