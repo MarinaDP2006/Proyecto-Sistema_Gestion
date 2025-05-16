@@ -53,4 +53,14 @@ public class PeliculaDAO {
     public List<Pelicula> listarPeliculas() {
         return new ArrayList<>(peliculas);
     }
+
+     /** Busca una película por su ID.
+     * @param idPelicula Identificador único de la película.
+     * @return La película encontrada o null si no existe.
+     */
+    public Pelicula buscarPelicula(int idPelicula) {
+        return peliculas.stream()
+            .filter(p -> p.getIdPelicula() == idPelicula)
+            .findFirst()
+            .orElse(null);
 }
