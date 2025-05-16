@@ -1,17 +1,15 @@
 package aplicacion;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-
-/* IMPLEMENTO LOS DAO Y DTO */
 import dao.AdministradorDAO;
 import dao.UsuarioDAO;
 import dto.Actor;
 import dto.Genero;
 import dto.Pelicula;
 import dto.Reparto;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Clase principal para gestionar el sistema cinematográfico.
@@ -24,10 +22,6 @@ public class GestorCine {
     private static AdministradorDAO adminDAO = new AdministradorDAO();
     private static UsuarioDAO usuarioDAO = new UsuarioDAO(peliculas, actores);
     
-    /**
-     * Método principal que inicia el sistema.
-     * @param args Argumentos de línea de comandos
-     */
     public static void main(String[] args) {
         cargarDatosIniciales(); 
         
@@ -38,12 +32,13 @@ public class GestorCine {
             System.out.println("2. Gestión de Películas");
             System.out.println("3. Gestión de Reparto");
             System.out.println("4. Consultas");
-            System.out.println("5. Salir");
+            System.out.println("5. Ver listado completo"); // Nueva opción
+            System.out.println("6. Salir");
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
-
+            scanner.nextLine(); 
+            
             switch (opcion) {
                 case 1:
                     gestionActores();
@@ -58,6 +53,9 @@ public class GestorCine {
                     realizarConsultas();
                     break;
                 case 5:
+                    mostrarListadoCompleto(); // Llama al nuevo método
+                    break;
+                case 6:
                     salir = confirmarSalida();
                     break;
                 default:
@@ -68,7 +66,37 @@ public class GestorCine {
         scanner.close();
     }
 
-    /**
+// Agrega este método al final de la clase
+private static void mostrarListadoCompleto() {
+    System.out.println("\n--- Listado de Actores (ordenados por apellido) ---");
+    actores.stream()
+        .sorted((a1, a2) -> a1.getApellido().compareToIgnoreCase(a2.getApellido()))
+        .forEach(actor -> System.out.println(actor));
+
+    System.out.println("\n--- Listado de Películas (ordenadas por título) ---");
+    peliculas.stream()
+        .sorted((p1, p2) -> p1.getTitulo().compareToIgnoreCase(p2.getTitulo()))
+        .forEach(pelicula -> System.out.println(pelicula));
+
+    System.out.println("\n--- Listado de Reparto (ordenados por película y actor) ---");
+    repartos.stream()
+        .sorted((r1, r2) -> {
+            int compare = Integer.compare(r1.getPelicula(), r2.getPelicula());
+            if (compare == 0) {
+                compare = Integer.compare(r1.getActor(), r2.getActor());
+            }
+            return compare;
+        })
+        .forEach(reparto -> {
+            // Busca el nombre de la película y del actor para mostrarlo más claro
+            Pelicula peli = peliculas.stream().filter(p -> p.getIdPelicula() == reparto.getPelicula()).findFirst().orElse(null);
+            Actor actor = actores.stream().filter(a -> a.getId() == reparto.getActor()).findFirst().orElse(null);
+            String nombrePeli = (peli != null) ? peli.getTitulo() : "Desconocida";
+            String nombreActor = (actor != null) ? actor.getNombre() + " " + actor.getApellido() : "Desconocido";
+            System.out.println("Película: " + nombrePeli + " | Actor: " + nombreActor + " | Personaje: " + reparto.getPersonaje());
+        });
+}
+/**
      * Confirma si el usuario desea salir del sistema.
      * @return true si desea salir, false en caso contrario
      */
@@ -77,10 +105,7 @@ public class GestorCine {
         String respuesta = scanner.nextLine();
         return respuesta.equalsIgnoreCase("SI");
     }
-        
-    /**
-     * Carga los datos iniciales en el sistema.
-     */
+
     private static void cargarDatosIniciales() {
         // Añadir actores
         actores.add(new Actor(1, "Robert", "Downey Jr", 1965, "Estadounidense"));
@@ -178,108 +203,115 @@ public class GestorCine {
         System.out.println("Datos iniciales cargados correctamente.");
     }
 
-    /**
-     * Método para gestionar actores.
-     */
-    private static void gestionActores() {
-        System.out.println("\n--- Gestión de Actores ---");
-        System.out.print("Ingrese el nombre del actor: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Ingrese el apellido del actor: ");
-        String apellido = scanner.nextLine();
-        System.out.print("Ingrese el año de nacimiento del actor: ");
-        int añoNacimiento = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
-        System.out.print("Ingrese la nacionalidad del actor: ");
-        String nacionalidad = scanner.nextLine();
+// ...existing code...
 
-        actores.add(new Actor(actores.size() + 1, nombre, apellido, añoNacimiento, nacionalidad));
-        System.out.println("Actor añadido correctamente.");
+private static void gestionActores() {
+    System.out.println("\n--- Gestión de Actores ---");
+    System.out.println("Listado actual de actores:");
+    actores.forEach(actor -> System.out.println(actor));
+    System.out.print("\n Ingrese el nombre del actor: ");
+    String nombre = scanner.nextLine();
+    System.out.print("Ingrese el apellido del actor: ");
+    String apellido = scanner.nextLine();
+    System.out.print("Ingrese el año de nacimiento del actor: ");
+    int añoNacimiento = scanner.nextInt();
+    scanner.nextLine();
+    System.out.print("Ingrese la nacionalidad del actor: ");
+    String nacionalidad = scanner.nextLine();
+
+    // Evita duplicados por nombre y apellido
+    boolean existe = actores.stream()
+        .anyMatch(a -> a.getNombre().equalsIgnoreCase(nombre) && a.getApellido().equalsIgnoreCase(apellido));
+    if (existe) {
+        System.out.println("Ese actor ya existe.");
+        return;
     }
 
-    /**
-     * Método para gestionar películas.
-     */
-    private static void gestionPeliculas() {
-        System.out.println("\n--- Gestión de Películas ---");
-        System.out.print("Ingrese el ID de la película: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+    actores.add(new Actor(actores.size() + 1, nombre, apellido, añoNacimiento, nacionalidad));
+    System.out.println("Actor añadido correctamente.");
+}
 
-        System.out.print("Ingrese el título de la película: ");
-        String titulo = scanner.nextLine();
-        
-        System.out.print("Ingrese el año de estreno: ");
-        int año = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
-        
-        System.out.print("Ingrese la duración (en minutos): ");
-        int duracion = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
-        
-        System.out.print("Ingrese el resumen de la película: ");
-        String resumen = scanner.nextLine();
-        
-        System.out.print("Ingrese el género de la película: ");
-        String generoStr = scanner.nextLine();
-        Genero genero = Genero.buscarPorNombre(generoStr);
+private static void gestionPeliculas() {
+    System.out.println("\n--- Gestión de Películas ---");
+    System.out.println("Listado de películas en el sistema:");
+    peliculas.forEach(p -> System.out.println(p));
+    System.out.print("\nIngrese el ID de la película: ");
+    int id = scanner.nextInt();
+    scanner.nextLine();
 
-        if (genero == null) {
-            System.out.println("Género no válido.");
-            return;
-        }
-
-        peliculas.add(new Pelicula(id, titulo, año, duracion, resumen, genero));
-        System.out.println("Película añadida correctamente.");
+    // Evita IDs duplicados
+    boolean existe = peliculas.stream().anyMatch(p -> p.getIdPelicula() == id);
+    if (existe) {
+        System.out.println("Ya existe una película con ese ID.");
+        return;
     }
 
-    /**
-     * Método para gestionar el reparto de películas.
-     */
-    private static void gestionReparto() {
-        System.out.println("\n--- Gestión de Reparto ---");
-        System.out.print("Ingrese el ID de la película: ");
-        int IDpelicula = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
-        System.out.print("Ingrese el ID del actor: ");
-        int IDactor = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
-        System.out.print("Ingrese el personaje que interpreta el actor: ");
-        String personaje = scanner.nextLine();
+    System.out.print("Ingrese el título de la película: ");
+    String titulo = scanner.nextLine();
+    System.out.print("Ingrese el año de estreno: ");
+    int año = scanner.nextInt();
+    scanner.nextLine();         
+    System.out.print("Ingrese la duración (en minutos): ");
+    int duracion = scanner.nextInt();
+    scanner.nextLine(); 
+    System.out.print("Ingrese el resumen de la película: ");
+    String resumen = scanner.nextLine();
+    System.out.print("Ingrese el género de la película: ");
+    String generoStr = scanner.nextLine();
+    Genero genero = Genero.buscarPorNombre(generoStr);
 
-        // Validar existencia de película y actor
-        Pelicula pelicula = peliculas.stream()
-            .filter(p -> p.getIdPelicula() == IDpelicula)
-            .findFirst()
-            .orElse(null);
-        Actor actor = actores.stream()
-            .filter(a -> a.getId() == IDactor)
-            .findFirst()
-            .orElse(null);
-
-        if (pelicula == null) {
-            System.out.println("La película con ese ID no existe.");
-            return;
-        }
-        if (actor == null) {
-            System.out.println("El actor con ese ID no existe.");
-            return;
-        }
-
-        // Verificar si el actor ya está en el reparto de la película con el mismo personaje
-        boolean yaExiste = repartos.stream()
-            .anyMatch(r -> r.getPelicula() == IDpelicula && r.getActor() == IDactor && r.getPersonaje().equalsIgnoreCase(personaje));
-    
-        if (yaExiste) {
-            System.out.println("El actor ya está en el reparto de la película con el mismo personaje.");
-            return;
-        }
-
-        // Agregar al reparto
-        repartos.add(new Reparto(IDpelicula, IDactor, personaje));
-        System.out.println("Reparto añadido correctamente.");
+    if (genero == null) {
+        System.out.println("Género no válido.");
+        return;
     }
 
+    peliculas.add(new Pelicula(id, titulo, año, duracion, resumen, genero));
+    System.out.println("Película añadida correctamente.");
+}
+
+private static void gestionReparto() {
+    System.out.println("\n--- Gestión de Reparto ---");
+    System.out.println("Películas disponibles:");
+    peliculas.forEach(p -> System.out.println("ID: " + p.getIdPelicula() + " - " + p.getTitulo()));
+    System.out.print("\nIngrese el ID de la película: ");
+    int IDpelicula = scanner.nextInt();
+    scanner.nextLine(); 
+    System.out.println("\nActores disponibles:");
+    actores.forEach(a -> System.out.println("ID: " + a.getId() + " - " + a.getNombre() + " " + a.getApellido()));
+    System.out.print("Ingrese el ID del actor: ");
+    int IDactor = scanner.nextInt();
+    scanner.nextLine(); 
+    System.out.print("Ingrese el personaje que interpreta el actor: ");
+    String personaje = scanner.nextLine();
+
+    Pelicula pelicula = peliculas.stream()
+        .filter(p -> p.getIdPelicula() == IDpelicula)
+        .findFirst()
+        .orElse(null);
+    Actor actor = actores.stream()
+        .filter(a -> a.getId() == IDactor)
+        .findFirst()
+        .orElse(null);
+
+    if (pelicula == null) {
+        System.out.println("La película con ese ID no existe.");
+        return;
+    }
+    if (actor == null) {
+        System.out.println("El actor con ese ID no existe.");
+        return;
+    }
+
+    boolean yaExiste = repartos.stream()
+        .anyMatch(r -> r.getPelicula() == IDpelicula && r.getActor() == IDactor && r.getPersonaje().equalsIgnoreCase(personaje));
+    if (yaExiste) {
+        System.out.println("El actor ya está en el reparto de la película con el mismo personaje.");
+        return;
+    }
+
+    repartos.add(new Reparto(IDpelicula, IDactor, personaje));
+    System.out.println("Reparto añadido correctamente.");
+}
     /**
      * Método para realizar consultas sobre películas.
      */
