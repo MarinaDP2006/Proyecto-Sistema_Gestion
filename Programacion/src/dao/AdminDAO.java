@@ -1,4 +1,5 @@
 package dao;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,15 +8,17 @@ import dto.Actor;
 import dto.Genero;
 import dto.Pelicula;
 
-/** Clase DAO para la gestión del sistema
+/**
+ * Clase DAO para la gestión del sistema
  * Con métodos CRUD para actores, películas y géneros.
  */
-public class AdminDAO {
+public class AdministradorDAO {
     private List<Actor> actores = new ArrayList<>();
     private List<Pelicula> peliculas = new ArrayList<>();
 
     // MÉTODOS PARA GESTIÓN DE ACTORES
-    /** Agrega un nuevo actor al sistema.
+    /**
+     * Agrega un nuevo actor al sistema.
      * @param actor Objeto Actor a agregar
      * @throws IllegalArgumentException Si el actor es nulo o ya existe en el sistema
      */
@@ -29,7 +32,8 @@ public class AdminDAO {
         actores.add(actor);
     }
 
-    /** Elimina un actor del sistema por su ID.
+    /**
+     * Elimina un actor del sistema por su ID.
      * @param idActor ID del actor a eliminar
      * @return true si se eliminó correctamente, false si no se encontró el actor
      */
@@ -37,7 +41,8 @@ public class AdminDAO {
         return actores.removeIf(a -> a.getId() == idActor);
     }
 
-    /** Busca un actor por su ID.
+    /**
+     * Busca un actor por su ID.
      * @param idActor ID del actor a buscar
      * @return Objeto Actor si se encuentra, null si no existe
      */
@@ -48,7 +53,8 @@ public class AdminDAO {
                      .orElse(null);
     }
     
-    /** Obtiene una lista de todos los actores registrados.
+    /**
+     * Obtiene una lista de todos los actores registrados.
      * @return Lista de actores (copia para evitar modificaciones externas)
      */
     public List<Actor> listarActores() {
@@ -73,7 +79,8 @@ public class AdminDAO {
 
     // MÉTODOS PARA GESTIÓN DE PELÍCULAS
 
-    /** Agrega una nueva película al sistema.
+    /**
+     * Agrega una nueva película al sistema.
      * @param pelicula Objeto Pelicula a agregar
      * @throws IllegalArgumentException Si la película es nula o ya existe
      */
@@ -87,7 +94,8 @@ public class AdminDAO {
         peliculas.add(pelicula);
     }
 
-    /** Elimina una película del sistema por su ID.
+    /**
+     * Elimina una película del sistema por su ID.
      * @param idPelicula ID de la película a eliminar
      * @return true si se eliminó correctamente, false si no se encontró la película
      */
@@ -95,7 +103,8 @@ public class AdminDAO {
         return peliculas.removeIf(p -> p.getIdPelicula() == idPelicula);
     }
 
-    /** Busca una película por su ID.
+    /**
+     * Busca una película por su ID.
      * @param idPelicula ID de la película a buscar
      * @return Objeto Pelicula si se encuentra, null si no existe
      */
@@ -132,7 +141,8 @@ public class AdminDAO {
     }
 
     // MÉTODOS PARA GESTIÓN DE GÉNEROS
-    /** Obtiene todos los géneros disponibles en el sistema.
+    /**
+     * Obtiene todos los géneros disponibles en el sistema.
      * @return Lista de todos los géneros
      */
     public List<Genero> listarGeneros() {
@@ -162,4 +172,4 @@ public class AdminDAO {
         }
         return resultado;
     }
-}   
+}
