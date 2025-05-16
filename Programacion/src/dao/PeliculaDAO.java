@@ -4,27 +4,31 @@ import dto.Pelicula;
 import dto.Genero;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
-/** Clase DAO para gestionar las operaciones CRUD de películas.
+/**
+ * Clase DAO para gestionar las operaciones CRUD de películas.
  * Tiene métodos para filtrar películas por género y otras consultas.
  */
 public class PeliculaDAO {
     private static List<Pelicula> peliculas = new ArrayList<>();
-    /** Registra una nueva película en el sistema.
-     * @param pelicula
+
+    /**
+     * Registra una nueva película en el sistema.
+     * @param pelicula Película a agregar
      * @throws IllegalArgumentException Si la película es nula o el género no es válido.
      */
-    
-    public void crearPelicula(Pelicula pelicula) {
+    public void add(Pelicula pelicula) {
         if (pelicula == null || pelicula.getGenero() == null) {
             throw new IllegalArgumentException("Película o género no válidos");
         }
         peliculas.add(pelicula);
     }
 
-    /** Filtra películas por género.
+    /**
+     * Filtra películas por género.
      * @param genero Género para filtrar (ej: Genero.ACCION).
-     * @return Lista de películas que coinciden con el género (lista vacía si no hay coincidencias).
+     * @return Lista de películas que coinciden con el género (lista vacía si no).
      */
     public List<Pelicula> filtrarPorGenero(Genero genero) {
         List<Pelicula> resultado = new ArrayList<>();
@@ -36,7 +40,8 @@ public class PeliculaDAO {
         return resultado;
     }
 
-    /*** Busca una película por su título.
+    /**
+     * Busca una película por su título.
      * @param titulo Título exacto de la película (no sensible a mayúsculas).
      * @return La película encontrada o null si no existe.
      */
@@ -47,21 +52,19 @@ public class PeliculaDAO {
             .orElse(null);
     }
 
-    /** Lista de todas las películas registradas.
-     * @return Lista completa de películas (copia para evitar modificaciones externas).
+    /**
+     * Lista de todas las películas registradas.
+     * @return Lista completa de películas.
      */
     public List<Pelicula> listarPeliculas() {
         return new ArrayList<>(peliculas);
     }
 
-     /** Busca una película por su ID.
-     * @param idPelicula Identificador único de la película.
-     * @return La película encontrada o null si no existe.
+    /**
+     * Devuelve un stream de películas.
+     * @return Stream de películas
      */
-    public Pelicula buscarPelicula(int idPelicula) {
-        return peliculas.stream()
-            .filter(p -> p.getIdPelicula() == idPelicula)
-            .findFirst()
-            .orElse(null);
+    public static Stream<Pelicula> stream() {
+        return peliculas.stream();
     }
 }
