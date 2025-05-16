@@ -2,7 +2,7 @@ package dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Admin {
+public class Administrador {
 	private String nombre;
     private String email;
     private String contraseña;
@@ -10,13 +10,13 @@ public class Admin {
     private List<Pelicula> peliculas;
     private List<Genero> generos;
 
-    /** Constructor que inicializa un administrador con sus datos y las listas vacías para gestionar los elementos del sistema.
+    /** Constructor
      * @param nombre 
      * @param email 
      * @param contraseña
      */
     
-    public Admin (String nombre, String email, String contraseña) {
+    public Administrador (String nombre, String email, String contraseña) {
         this.nombre = nombre;
         this.email = email;
         this.contraseña = contraseña;
