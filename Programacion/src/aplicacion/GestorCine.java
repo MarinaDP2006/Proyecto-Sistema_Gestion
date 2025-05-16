@@ -203,8 +203,7 @@ private static void mostrarListadoCompleto() {
         System.out.println("Datos iniciales cargados correctamente.");
     }
 
-// ...existing code...
-
+// Métodos para gestion de actores, reparto y peliculas
 private static void gestionActores() {
     System.out.println("\n--- Gestión de Actores ---");
     System.out.println("Listado actual de actores:");
