@@ -9,16 +9,18 @@ import dto.Pelicula;
 import dto.Genero;
 import dto.Actor;
 
-/** Clase DAO para las operaciones de usuario en el sistema
+/**
+ * Clase DAO para las operaciones de usuario en el sistema
  * Con métodos de consulta para películas, actores y géneros
  */
 public class UsuarioDAO {
     private List<Pelicula> peliculas;
     private List<Actor> actores;
 
-    /** Constructor que inicializa las listas de datos.
-     * @param peliculas 
-     * @param actores
+    /**
+     * Constructor que inicializa las listas de datos.
+     * @param peliculas Lista de películas
+     * @param actores Lista de actores
      */
     public UsuarioDAO(List<Pelicula> peliculas, List<Actor> actores) {
         this.peliculas = new ArrayList<>(peliculas);
@@ -26,7 +28,8 @@ public class UsuarioDAO {
     }
 
     // MÉTODOS PARA CONSULTA DE PELÍCULAS
-    /** Busca una película por su título
+    /**
+     * Busca una película por su título.
      * @param titulo Título o parte del título a buscar
      * @return Lista de películas que coinciden
      */
@@ -36,7 +39,8 @@ public class UsuarioDAO {
                 .collect(Collectors.toList());
     }
 
-    /** Filtra películas por género.
+    /**
+     * Filtra películas por género.
      * @param genero Género para filtrar
      * @return Lista de películas del género especificado (lista vacía si no hay coincidencias)
      */
@@ -46,17 +50,19 @@ public class UsuarioDAO {
                 .collect(Collectors.toList());
     }
 
-    /** Da las películas estrenadas en año exacto.
+    /**
+     * Devuelve las películas estrenadas en un año exacto.
      * @param año Año de estreno a buscar
      * @return Lista de películas estrenadas ese año (lista vacía si no hay coincidencias)
      */
     public List<Pelicula> peliculasEstrenadasEnAno(int año) {
         return peliculas.stream()
-                .filter(pelicula -> pelicula.getAnoEstreno() == año)
+                .filter(pelicula -> pelicula.getAño() == año)
                 .collect(Collectors.toList());
     }
 
-    /** Da todas las películas disponibles ordenadas por título.
+    /**
+     * Devuelve todas las películas disponibles ordenadas por título.
      * @return Lista completa de películas ordenadas alfabéticamente
      */
     public List<Pelicula> obtenerPeliculasOrdenadasPorTitulo() {
@@ -66,7 +72,8 @@ public class UsuarioDAO {
     }
 
     // MÉTODOS PARA CONSULTA DE ACTORES
-    /** Busca un actor por nombre o apellido (búsqueda insensible a mayúsculas).
+    /**
+     * Busca un actor por nombre o apellido (búsqueda insensible a mayúsculas).
      * @param nombre Nombre o parte del nombre a buscar
      * @return Lista de actores que coinciden con el criterio (lista vacía si no hay coincidencias)
      */
@@ -77,7 +84,8 @@ public class UsuarioDAO {
                 .collect(Collectors.toList());
     }
 
-    /** Filtra actores por nacionalidad.
+    /**
+     * Filtra actores por nacionalidad.
      * @param nacionalidad Nacionalidad a buscar
      * @return Lista de actores de la nacionalidad especificada (lista vacía si no hay coincidencias)
      */
@@ -87,8 +95,9 @@ public class UsuarioDAO {
                 .collect(Collectors.toList());
     }
 
-    /** Da la filmografía completa de un actor. Verificando si existe y filtro las peliculas donde aparece ese actor
-     * @param idActor
+    /**
+     * Devuelve la filmografía completa de un actor, verificando si existe y filtrando las películas donde aparece ese actor.
+     * @param idActor ID del actor
      * @return Lista de películas en las que ha participado el actor
      */
     public List<Pelicula> obtenerFilmografiaDeActor(int idActor) {
@@ -97,7 +106,8 @@ public class UsuarioDAO {
                 .collect(Collectors.toList());
     }
 
-    /** Da todos los actores registrados ordenados alfabéticamente.
+    /**
+     * Devuelve todos los actores registrados ordenados alfabéticamente.
      * @return Lista completa de actores ordenada por apellido
      */
     public List<Actor> obtenerActoresOrdenadosPorApellido() {
@@ -107,18 +117,20 @@ public class UsuarioDAO {
     }
 
     // MÉTODOS PARA GÉNEROS
-    /** Da todos los géneros cinematográficos disponibles.
+    /**
+     * Devuelve todos los géneros cinematográficos disponibles.
      * @return Lista de todos los géneros
      */
     public List<Genero> obtenerTodosGeneros() {
         return peliculas.stream()
                 .map(Pelicula::getGenero)
-                .distinct() //eliminar genero duplicados
+                .distinct() // Eliminar géneros duplicados
                 .collect(Collectors.toList());
     }
 
-    /** Muestra las estadísticas de películas por género.
-     * @return cuenta las películas por cada género
+    /**
+     * Muestra las estadísticas de películas por género.
+     * @return Mapa que cuenta las películas por cada género
      */
     public Map<Genero, Long> estadisticasPeliculasPorGenero() {
         return peliculas.stream()
