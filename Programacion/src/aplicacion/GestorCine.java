@@ -32,7 +32,7 @@ public class GestorCine {
             System.out.println("2. Gestión de Películas");
             System.out.println("3. Gestión de Reparto");
             System.out.println("4. Consultas");
-            System.out.println("5. Ver listado completo"); // Nueva opción
+            System.out.println("5. Ver listado completo");
             System.out.println("6. Salir");
             System.out.print("Seleccione una opción: ");
 
@@ -53,7 +53,7 @@ public class GestorCine {
                     realizarConsultas();
                     break;
                 case 5:
-                    mostrarListadoCompleto(); // Llama al nuevo método
+                    mostrarListadoCompleto();
                     break;
                 case 6:
                     salir = confirmarSalida();
