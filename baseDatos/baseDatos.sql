@@ -67,7 +67,7 @@ INSERT INTO genero (genero_id, nombre) VALUES
 (5, 'Aventura'),
 (6, 'Fantasía');
 
-INSERT INTO actor (actor_id, nombre, apellidos, año_nacimiento, nacionalidad) VALUES
+INSERT INTO `actor` (`actor_id`, `nombre`, `apellidos`, `año_nacimiento`, `nacionalidad`) VALUES
 (1, 'Robert', 'Downey Jr', 1965, 'Estadounidense'),
 (2, 'Chris', 'Evans', 1981, 'Estadounidense'),
 (3, 'Christian', 'Bale', 1974, 'Británico'),
@@ -86,9 +86,13 @@ INSERT INTO actor (actor_id, nombre, apellidos, año_nacimiento, nacionalidad) V
 (16, 'Harrison', 'Ford', 1942, 'Estadounidense'),
 (17, 'Karen', 'Allen', 1951, 'Estadounidense'),
 (18, 'Jason', 'Statham', 1967, 'Británico'),
-(19, 'Li', 'Bingbing', 1973, 'China');
+(19, 'Li', 'Bingbing', 1973, 'China'),
+(20, 'Sam', 'Neill', 1947, 'Neozelandés'),
+(21, 'Laura', 'Dern', 1967, 'Estadounidense'),
+(22, 'Daniel', 'Radcliffe', 1989, 'Británico'),
+(23, 'Emma', 'Watson', 1990, 'Britanica');
 
-INSERT INTO pelicula (pelicula_id, titulo, año_estreno, duracion, genero_id) VALUES
+INSERT INTO `pelicula` (`pelicula_id`, `titulo`, `año_estreno`, `duracion`, `genero_id`) VALUES
 (1, 'El Conjuro', 2013, 112, 1),
 (2, 'Hereditary', 2018, 127, 1),
 (3, 'Forrest Gump', 1994, 142, 2),
@@ -98,11 +102,10 @@ INSERT INTO pelicula (pelicula_id, titulo, año_estreno, duracion, genero_id) VA
 (7, 'Blade Runner 2049', 2017, 164, 4),
 (8, 'Indiana Jones: Raiders of the Lost Ark', 1981, 115, 5),
 (9, 'Jurassic Park', 1993, 127, 5),
-(10, 'El Señor de los Anillos: La Comunidad del Anillo', 2001, 178, 6),
-(11, 'Harry Potter y la Piedra Filosofal', 2001, 152, 6),
-(12, 'The Meg', 2018, 113, 4);
+(12, 'The Meg', 2018, 113, 4),
+(13, 'Harry Potter Saga', 2001, 152, 6);
 
-INSERT INTO reparto (pelicula_id, actor_id, personaje) VALUES
+INSERT INTO `reparto` (`pelicula_id`, `actor_id`, `personaje`) VALUES
 (1, 4, 'Lorraine Warren'),
 (1, 5, 'Ed Warren'),
 (2, 11, 'Annie Graham'),
@@ -111,14 +114,16 @@ INSERT INTO reparto (pelicula_id, actor_id, personaje) VALUES
 (3, 15, 'Jenny Curran'),
 (4, 9, 'Jack Dawson'),
 (4, 15, 'Rose DeWitt Bukater'),
-(5, 14, 'Sebastian Wilder'),
 (5, 13, 'Mia Dolan'),
-(6, 1, 'Tony Stark/Iron Man'),
-(6, 17, 'Natasha Romanoff/Black Widow'),
+(5, 14, 'Sebastian Wilder'),
+(6, 1, 'Iron Man'),
+(6, 17, 'Black Widow'),
 (7, 14, 'K'),
 (8, 16, 'Indiana Jones'),
 (8, 17, 'Marion Ravenwood'),
-(9, 18, 'Dr. Alan Grant'),
-(9, 19, 'Dr. Ellie Sattler'),
+(9, 20, 'Dr. Alan Grant'),
+(9, 21, 'Dr. Ellie Sattler'),
 (12, 18, 'Jonas Taylor'),
-(12, 19, 'Suyin Zhang');
+(12, 19, 'Suyin Zhang'),
+(13, 22, 'Harry Potter'),
+(13, 23, 'Hermione Granger');
