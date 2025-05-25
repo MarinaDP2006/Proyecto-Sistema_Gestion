@@ -6,28 +6,28 @@ import dto.Actor;
 import dto.Genero;
 import dto.Pelicula;
 import dto.Reparto;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 
-// PONER CONEXION A BASE DE DATOS
-/**
- * Clase principal para gestionar el sistema cinematográfico.
- */
+/* Clase principal para gestionar el sistema cinematográfico. */
 public class GestorCine {
     private static Scanner scanner = new Scanner(System.in);
-    private static List<Actor> actores = new ArrayList<>(); // guarda actord
+    private static List<Actor> actores = new ArrayList<>(); // guarda actores
     private static List<Pelicula> peliculas = new ArrayList<>(); // guarda peliculas
     private static List<Reparto> repartos = new ArrayList<>(); // guarda el reparto
     private static AdministradorDAO adminDAO = new AdministradorDAO(); // acceso para administrador
     private static UsuarioDAO usuarioDAO = new UsuarioDAO(peliculas, actores); // acceso para usuario, visualiza las peliculas con el reparto y los actores
     
-    // El sistema pide que se identifique el administrador, sino lo es, solo puede hacer consultas y ver la pagina completa de datos
-    private static final String ADMIN_NAME = "Marina";
+    private static final String ADMIN_NAME = "Marina"; // NOMBRE DEL ADMINISTRADOR
     
     public static void main(String[] args) {
+        cargarDatosIniciales(); 
+        cargarDatosIniciales();
+
         System.out.print("\n Ingrese su nombre para acceder al sistema: ");
         String usuario = scanner.nextLine();
         boolean esAdmin = ADMIN_NAME.equalsIgnoreCase(usuario);
@@ -70,7 +70,7 @@ public class GestorCine {
             }
         }
 
-        System.out.println("\nSistema cerrado.");
+        System.out.println("\nSistema cerrado. ¡Hasta pronto!");
         scanner.close();
     }
 
@@ -112,6 +112,90 @@ private static void mostrarListadoCompleto() {
         System.out.print("\n¿Está seguro que desea salir? (SI/NO): ");
         String respuesta = scanner.nextLine();
         return respuesta.equalsIgnoreCase("SI");
+    }
+
+    private static void cargarDatosIniciales() {
+    	// Añadir actores
+    	actores.add(new Actor(1, "Robert", "Downey Jr", 1965, "Estadounidense"));
+    	actores.add(new Actor(2, "Scarlett", "Johansson", 1984, "Estadounidense"));
+    	actores.add(new Actor(3, "Christian", "Bale", 1974, "Británico"));
+    	actores.add(new Actor(4, "Vera", "Farmiga", 1973, "Estadounidense"));
+    	actores.add(new Actor(5, "Patrick", "Wilson", 1973, "Estadounidense"));
+    	actores.add(new Actor(6, "Bill", "Skarsgård", 1990, "Sueco"));
+    	actores.add(new Actor(7, "Tom", "Hanks", 1956, "Estadounidense"));
+    	actores.add(new Actor(8, "Viggo", "Mortensen", 1958, "Estadounidense-Danés"));
+    	actores.add(new Actor(9, "Leonardo", "DiCaprio", 1974, "Estadounidense"));
+    	actores.add(new Actor(10, "Matthew", "McConaughey", 1969, "Estadounidense"));
+    	actores.add(new Actor(11, "Toni", "Collette", 1972, "Australiana"));
+    	actores.add(new Actor(12, "Alex", "Wolff", 1997, "Estadounidense"));
+    	actores.add(new Actor(13, "Emma", "Stone", 1988, "Estadounidense"));
+    	actores.add(new Actor(14, "Ryan", "Gosling", 1980, "Canadiense"));
+    	actores.add(new Actor(15, "Kate", "Winslet", 1975, "Británica"));
+    	actores.add(new Actor(16, "Harrison", "Ford", 1942, "Estadounidense"));
+    	actores.add(new Actor(17, "Karen", "Allen", 1951, "Estadounidense"));
+    	actores.add(new Actor(18, "Jason", "Statham", 1967, "Británico"));
+    	actores.add(new Actor(19, "Li", "Bingbing", 1973, "China"));
+    	actores.add(new Actor(20, "Sam", "Neill", 1947, "Neozelandés"));
+    	actores.add(new Actor(21, "Laura", "Dern", 1967, "Estadounidense"));
+    	actores.add(new Actor(22, "Daniel", "Radcliffe", 1989, "Británico"));
+    	actores.add(new Actor(23, "Emma", "Watson", 1990, "Britanica"));
+
+    	// Añadir películas
+    	peliculas.add(new Pelicula(1, "El Conjuro", 2013, 112, "Investigadores paranormales enfrentan un caso real", Genero.TERROR));
+    	peliculas.add(new Pelicula(2, "Hereditary", 2018, 127,"Una familia atormentada por fuerzas oscuras", Genero.TERROR));
+    	peliculas.add(new Pelicula(3, "Forrest Gump", 1994, 142, "La vida de un hombre con discapacidad intelectual", Genero.DRAMA));
+    	peliculas.add(new Pelicula(4, "Titanic", 1997, 195, "Historia de amor en el famoso barco", Genero.ROMANCE));
+    	peliculas.add(new Pelicula(5, "La La Land", 2016, 128, "Un músico y una actriz persiguen sus sueños en Los Ángeles", Genero.ROMANCE));
+    	peliculas.add(new Pelicula(6, "Avengers", 2012, 143,"Superhéroes unidos para salvar el mundo contra un enemigo de otro mundo", Genero.CIENCIA_FICCION));
+    	peliculas.add(new Pelicula(7, "Blade Runner 2049", 2017, 164, "Un cazador de replicantes descubre un secreto oculto", Genero.CIENCIA_FICCION));
+    	peliculas.add(new Pelicula(8, "Indiana Jones: Raiders of the Lost Ark", 1981, 115, "Un arqueólogo busca el Arca de la Alianza", Genero.AVENTURA));
+    	peliculas.add(new Pelicula(9, "Jurassic Park", 1993, 127, "Un parque temático con dinosaurios clonados",  Genero.AVENTURA));
+    	peliculas.add(new Pelicula(12, "The Meg", 2018, 113, "Un grupo de científicos se enfrenta a un megalodón prehistórico que resurge de las profundidades del océano", Genero.CIENCIA_FICCION));
+    	peliculas.add(new Pelicula(13, "Harry Potter Saga", 2001, 152, "Un joven mago descubre su herencia mágica y es escogido en una escuela mágica llamada Hogwarts", Genero.FANTASIA));
+
+    	// Añadir reparto
+    	// El Conjuro
+    	repartos.add(new Reparto(1, 4, "Lorraine Warren"));
+    	repartos.add(new Reparto(1, 5, "Ed Warren"));
+
+    	// Hereditary
+    	repartos.add(new Reparto(2, 11, "Annie Graham"));
+    	repartos.add(new Reparto(2, 12, "Peter Graham"));
+
+    	// Forrest Gump
+    	repartos.add(new Reparto(3, 7, "Forrest Gump"));
+    	repartos.add(new Reparto(3, 15, "Jenny Curran"));
+
+    	// Titanic
+    	repartos.add(new Reparto(4, 9, "Jack Dawson"));
+    	repartos.add(new Reparto(4, 15, "Rose DeWitt Bukater"));
+
+    	// La La Land
+    	repartos.add(new Reparto(5, 13, "Mia Dolan"));
+    	repartos.add(new Reparto(5, 14, "Sebastian Wilder"));
+
+    	// Avengers
+    	repartos.add(new Reparto(6, 1, "Iron Man"));
+    	repartos.add(new Reparto(6, 2, "Black Widow"));
+
+    	// Blade Runner 2049
+    	repartos.add(new Reparto(7, 14, "K"));
+
+    	// Indiana Jones
+    	repartos.add(new Reparto(8, 16, "Indiana Jones"));
+    	repartos.add(new Reparto(8, 17, "Marion Ravenwood"));
+
+    	// Jurassic Park
+    	repartos.add(new Reparto(9, 20, "Dr. Alan Grant"));
+    	repartos.add(new Reparto(9, 21, "Dr. Ellie Sattler"));
+
+    	// The Meg
+    	repartos.add(new Reparto(12, 18, "Jonas Taylor"));
+    	repartos.add(new Reparto(12, 19, "Suyin Zhang"));
+
+    	// Harry Potter Saga
+    	repartos.add(new Reparto(13, 22, "Harry Potter"));
+    	repartos.add(new Reparto(13, 23, "Hermione Granger"));
     }
 
 // Métodos para gestion de actores, reparto y peliculas
@@ -505,7 +589,7 @@ private static void mostrarListadoCompleto() {
 
         System.out.print("Ingrese el nombre del personaje que desea buscar: ");
         String personaje = scanner.nextLine();
-        // Según el personaje que introduzca, aparece la película a la que está relacionado
+
         List<Reparto> personajesEncontrados = repartos.stream()
             .filter(r -> r.getPelicula() == pelicula.getIdPelicula() && r.getPersonaje().equalsIgnoreCase(personaje))
             .collect(Collectors.toList());
@@ -519,7 +603,7 @@ private static void mostrarListadoCompleto() {
                     .filter(a -> a.getId() == r.getActor())
                     .findFirst()
                     .orElse(null);
-                // Aparece el personaje y el actor/actriz que lo interpreta
+                
                 System.out.println("Personaje: " + r.getPersonaje());
                 System.out.println("Interpretado por: " + (actor != null ? actor.getNombre() + " " + actor.getApellido() : "Actor desconocido"));
             });
