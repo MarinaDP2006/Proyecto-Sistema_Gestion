@@ -1,4 +1,4 @@
-Registrar nueva película con validación de género
+-- Registrar nueva película con validación de género
 DELIMITER //
 CREATE PROCEDURE registrar_pelicula(
     IN titulo_param VARCHAR(100),
@@ -16,7 +16,7 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
-Actualizar información de un actor con control de existencia: Verifica que el actor existe antes de cambiar algo de su información
+-- Actualizar información de un actor con control de existencia: Verifica que el actor existe antes de cambiar algo de su información
 DELIMITER //
 CREATE PROCEDURE actualizar_actor(
     IN actor_id_param INT,
@@ -39,7 +39,7 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
-Obtener el total de películas de un actor
+-- Obtener el total de películas de un actor
 DELIMITER //
 CREATE PROCEDURE contar_peliculas_actor(
     IN actor_id_param INT
@@ -50,7 +50,7 @@ BEGIN
     WHERE actor_id = actor_id_param;
 END //
 DELIMITER ;
-Eliminar un género con validación
+-- Eliminar un género con validación
 DELIMITER //
 CREATE PROCEDURE eliminar_genero(
     IN genero_id_param INT
@@ -64,7 +64,7 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
-Actualizar la duración de una película
+-- Actualizar la duración de una película
 DELIMITER //
 CREATE PROCEDURE actualizar_duracion(
     IN pelicula_id_param INT,
@@ -76,7 +76,7 @@ BEGIN
     WHERE pelicula_id = pelicula_id_param;
 END //
 DELIMITER ;
-Obtener la información de todos los actores
+-- Obtener la información de todos los actores
 DELIMITER //
 CREATE PROCEDURE obtener_todos_los_actores()
 BEGIN
