@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 
-/* Clase principal para gestionar el sistema cinematográfico. */
+/* Clase principal para gestionar el sistema cinematográfico.*/
 public class GestorCine {
     private static Scanner scanner = new Scanner(System.in);
     private static List<Actor> actores = new ArrayList<>(); // guarda actores
