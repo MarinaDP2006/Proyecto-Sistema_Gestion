@@ -11,17 +11,18 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+
 // PONER CONEXION A BASE DE DATOS
 /**
  * Clase principal para gestionar el sistema cinematográfico.
  */
 public class GestorCine {
     private static Scanner scanner = new Scanner(System.in);
-    private static List<Actor> actores = new ArrayList<>();
-    private static List<Pelicula> peliculas = new ArrayList<>();
-    private static List<Reparto> repartos = new ArrayList<>();
-    private static AdministradorDAO adminDAO = new AdministradorDAO();
-    private static UsuarioDAO usuarioDAO = new UsuarioDAO(peliculas, actores);
+    private static List<Actor> actores = new ArrayList<>(); // guarda actord
+    private static List<Pelicula> peliculas = new ArrayList<>(); // guarda peliculas
+    private static List<Reparto> repartos = new ArrayList<>(); // guarda el reparto
+    private static AdministradorDAO adminDAO = new AdministradorDAO(); // acceso para administrador
+    private static UsuarioDAO usuarioDAO = new UsuarioDAO(peliculas, actores); // acceso para usuario, visualiza las peliculas con el reparto y los actores
     
     // El sistema pide que se identifique el administrador, sino lo es, solo puede hacer consultas y ver la pagina completa de datos
     private static final String ADMIN_NAME = "Marina";
@@ -504,7 +505,7 @@ private static void mostrarListadoCompleto() {
 
         System.out.print("Ingrese el nombre del personaje que desea buscar: ");
         String personaje = scanner.nextLine();
-
+        // Según el personaje que introduzca, aparece la película a la que está relacionado
         List<Reparto> personajesEncontrados = repartos.stream()
             .filter(r -> r.getPelicula() == pelicula.getIdPelicula() && r.getPersonaje().equalsIgnoreCase(personaje))
             .collect(Collectors.toList());
@@ -518,7 +519,7 @@ private static void mostrarListadoCompleto() {
                     .filter(a -> a.getId() == r.getActor())
                     .findFirst()
                     .orElse(null);
-                
+                // Aparece el personaje y el actor/actriz que lo interpreta
                 System.out.println("Personaje: " + r.getPersonaje());
                 System.out.println("Interpretado por: " + (actor != null ? actor.getNombre() + " " + actor.getApellido() : "Actor desconocido"));
             });
