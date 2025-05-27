@@ -7,4 +7,5 @@
 - Programacion
   - Estructura y análisis del proyecto
   - Estructura y conexion a BD
-  - src
+  - JavaProyect
+  - GUION DEFENSA PROYECTO.pdf (7 pág + capturas y código)
